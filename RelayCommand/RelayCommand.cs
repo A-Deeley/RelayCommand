@@ -1,8 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 
-namespace RelayCommand
+namespace RelayCommandLibrary
 {
-    internal class RelayCommand : RelayCommand<object>
+    public class RelayCommand : RelayCommand<object>
     {
         public RelayCommand(Action<object> execute)
             : base(execute) { }
@@ -11,7 +12,7 @@ namespace RelayCommand
             :base(execute, canExecute) { }
     }
 
-    internal class RelayCommand<T> : ICommand
+    public class RelayCommand<T> : ICommand
     {
         private Action<T> execute;
 
