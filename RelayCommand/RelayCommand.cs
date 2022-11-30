@@ -41,17 +41,15 @@ namespace RelayCommandLibrary
             this.canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
         }
 
-        public void Execute(object parameter) => Execute(parameter);
-        public bool CanExecute(object parameter) => CanExecute(parameter);
-
-        private bool CanExecute(T parameter)
+        public void Execute(object parameter)
         {
-            return canExecute != null && canExecute(parameter);
+            execute((T)parameter);
         }
-
-        private void Execute(T parameter)
+        public bool CanExecute(object parameter)
         {
-            execute(parameter);
+            if (canExecute == null) return true;
+
+            return canExecute((T)parameter);
         }
 
         private static bool DefaultCanExecute(T param)
